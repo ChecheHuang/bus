@@ -1,0 +1,256 @@
+@import "../../mixin.scss";
+
+.searchBus {
+    width: 100%;
+    height: 100vh;
+    padding: 25px 0 100px 100px;
+    display: flex;
+    background: black;
+
+    @include ipad {
+        flex-direction: column;
+        padding: 0;
+        position: relative;
+    }
+
+    .searchInput {
+        width: 360px;
+        height: 550px;
+        margin-right: 42px;
+
+        @include ipad {
+            width: 100%;
+        }
+
+        @include iphone {}
+
+
+        .top {
+            height: 55px;
+            width: 100%;
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 13px;
+
+            @include ipad {
+                height: 104px;
+                align-items: center;
+                margin-bottom: 0;
+            }
+
+
+            img {
+                width: 132px;
+                height: 55px;
+                margin-right: 9px;
+                cursor: pointer;
+
+                @include ipad {
+                    margin-right: 14px;
+                    margin-left: 16px;
+                    margin-top: 25px;
+                    margin-bottom: 24px;
+                }
+
+                @include iphone {
+                    width: 96px;
+                    height: 40.26px;
+                    margin-right: 16.74px;
+                }
+            }
+
+            input[type=text] {
+                background: $background1;
+                border-radius: 6px;
+                padding: 10px 10px 10px 16px;
+                color: $main;
+                width: 219px;
+                height: 40px;
+                @include H2_TC ();
+
+                &:focus {
+                    outline: 1.5px solid $main;
+                }
+
+                @include ipad {
+                    width: 557px;
+                    height: 56px;
+
+                    &:focus {
+                        outline: 3px solid $main;
+                    }
+                }
+
+                @include iphone {
+                    width: 220px;
+                    height: 40px;
+                }
+            }
+        }
+
+        .down {
+            background: gray;
+            width: 360px;
+            height: 80vh;
+            background: $background1;
+            border-radius: 10px;
+            padding: 20px 22px 0 20px;
+            display: grid;
+            grid-template-columns: repeat(5, 54px);
+            grid-auto-rows: 40px;
+            gap: 12px;
+
+            @include ipad {
+                height: 328px;
+                width: 100%;
+                padding: 24px 49px 24px 49px;
+                grid-template-columns: repeat(5, 126px);
+                grid-auto-rows: 48px;
+                position: absolute;
+                bottom: 0;
+                z-index: 2;
+                transition: .5s ease-in-out;
+
+                &.hide {
+                    bottom: -328px;
+                }
+
+            }
+
+            @include iphone {
+                height: 295px;
+                padding: 20px 22px 23px 20px;
+                grid-template-columns: repeat(5, 54px);
+                grid-auto-rows: 40px;
+
+                &.hide {
+                    bottom: -295px;
+                }
+            }
+
+            button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid $main;
+                border-radius: 9px;
+                background: transparent;
+                color: $main;
+                cursor: pointer;
+
+                @include ipad {
+                    @include H2_TC();
+                }
+
+
+
+                &:hover,
+                &.active {
+                    background: $main;
+                    color: black;
+
+                }
+
+                &.white {
+                    color: white;
+                }
+
+                &.selectCity {
+                    grid-column: 1 / 4;
+                }
+
+                &.manual {
+                    grid-column: 4 / 6;
+                }
+
+                &.set {
+                    grid-column: 3 / 6;
+                }
+            }
+        }
+    }
+
+    .searchResults {
+        height: calc(100vh - 25px);
+        width: 100%;
+        margin-right: 100px;
+        color: white;
+        overflow-y: scroll;
+        // position: relative;
+
+        @include ipad {
+            height: calc(100vh - 104px);
+            position: absolute;
+            top: 104px;
+            z-index: 1;
+
+        }
+
+        &::-webkit-scrollbar {
+            width: 0.625vw;
+        }
+
+        &::-webkit-scrollbar-track {
+            background-color: black;
+            -webkit-border-radius: 2em;
+            -moz-border-radius: 2em;
+            border-radius: 2em;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border: 2px solid gray;
+            // background-color: gray;
+            -webkit-border-radius: 2em;
+            -moz-border-radius: 2em;
+            border-radius: 2em;
+        }
+
+        .lottieContainer {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            height: 70px;
+        }
+
+        .title {
+            @include H2_TC();
+
+            @include ipad {
+                margin-left: 16px;
+                margin-top: 20px;
+            }
+        }
+
+        .results {
+            width: 100%;
+
+            .item {
+                width: 100%;
+                height: 69px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding: 12px 8px 12px 16px;
+                background: gray;
+
+                &:nth-child(odd) {
+                    background: black;
+                }
+
+                .title {
+                    @include H1_TC();
+                    color: $main;
+                }
+
+                .info {
+                    @include H3_TC();
+
+                    span {
+                        color: $main;
+                        margin: 0 10px;
+                    }
+                }
+            }
+        }
+    }
+}
