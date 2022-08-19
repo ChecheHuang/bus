@@ -6,6 +6,7 @@
     padding: 25px 0 100px 100px;
     display: flex;
     background: black;
+    overflow: hidden;
 
     @include ipad {
         flex-direction: column;
@@ -99,6 +100,7 @@
             grid-template-columns: repeat(5, 54px);
             grid-auto-rows: 40px;
             gap: 12px;
+            justify-content: center;
 
             @include ipad {
                 height: 328px;

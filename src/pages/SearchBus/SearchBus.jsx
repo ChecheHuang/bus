@@ -7,32 +7,14 @@ import Bus from '../../Bus.mp3'
 import { useEffect, useState } from 'react'
 import { initButtons, selectCityButtons, moreButtons } from './button'
 import { useDebounce } from '../../config/tool'
-
+import { axiosData } from '../../api/getAuthorizationHeader'
 function SearchBus() {
   const [loading, setLoading] = useState(false)
+  const [routeData, setRouteData] = useState([])
   const [buttons, setButtons] = useState(initButtons)
   const [input, setInput] = useState('')
   const [isInputHide, setIsInputHide] = useState(false)
-  const data = [
-    { title: '紅10', from: '台北海大', to: '捷運劍潭站' },
-    { title: '紅10區', from: '社子', to: '捷運劍潭站' },
-    { title: '紅12', from: '天文科學館', to: '捷運劍潭站' },
-    { title: '紅12', from: '天文科學館', to: '捷運劍潭站' },
-    { title: '紅12', from: '天文科學館', to: '捷運劍潭站' },
-    { title: '紅12', from: '天文科學館', to: '捷運劍潭站' },
-    { title: '紅12', from: '天文科學館', to: '捷運劍潭站' },
-    { title: '紅12', from: '天文科學館', to: '捷運劍潭站' },
-    { title: '紅12', from: '天文科學館', to: '捷運劍潭站' },
-    { title: '紅12', from: '天文科學館', to: '捷運劍潭站' },
-    { title: '紅12', from: '天文科學館', to: '捷運劍潭站' },
-    { title: '紅12', from: '天文科學館', to: '捷運劍潭站' },
-    { title: '紅12', from: '天文科學館', to: '捷運劍潭站' },
-    { title: '紅12', from: '天文科學館', to: '捷運劍潭站' },
-    { title: '紅12', from: '天文科學館', to: '捷運劍潭站' },
-    { title: '紅12', from: '天文科學館', to: '捷運劍潭站' },
-    { title: '紅12', from: '天文科學館', to: '捷運劍潭站' },
-    { title: '紅12', from: '天文科學館', to: '捷運劍潭站' },
-  ]
+  const [scroll, setScroll] = useState(0)
   const audio = new Audio(Bus)
   audio.loop = true
   function handleButtonClick(value, index) {
@@ -88,13 +70,14 @@ function SearchBus() {
         break
     }
   }
-  let scroll = 0
   function handleScroll(e) {
     const currentScroll = e.currentTarget.scrollTop
     if (currentScroll > scroll) {
-      scroll = currentScroll
+      setScroll(currentScroll)
       setIsInputHide(true)
     } else {
+      setScroll(currentScroll)
+
       setIsInputHide(false)
     }
   }
@@ -112,6 +95,15 @@ function SearchBus() {
       debouncedSave(input)
     }
   }, [input])
+
+  useEffect(() => {
+    axiosData(
+      'https://ptx.transportdata.tw/MOTC/v2/Bus/Route/City/Taipei?%24top=30&%24format=JSON',
+      (data) => {
+        setRouteData(data)
+      }
+    )
+  }, [])
 
   return (
     <div className="searchBus">
@@ -155,8 +147,12 @@ function SearchBus() {
           <>
             <div className="title">台北市</div>
             <div className="results">
-              {data.map((item, index) => {
-                const { title, from, to } = item
+              {routeData.map((item, index) => {
+                const {
+                  DepartureStopNameZh,
+                  DestinationStopNameZh,
+                  RouteName,
+                } = item
                 return (
                   <div
                     onClick={() => {
@@ -165,11 +161,11 @@ function SearchBus() {
                     key={index}
                     className="item"
                   >
-                    <div className="title">{title}</div>
+                    <div className="title">{RouteName.Zh_tw}</div>
                     <div className="info">
-                      {from}
+                      {DepartureStopNameZh}
                       <span>往</span>
-                      {to}
+                      {DestinationStopNameZh}
                     </div>
                   </div>
                 )

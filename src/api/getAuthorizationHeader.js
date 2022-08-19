@@ -1,4 +1,6 @@
 import jsSHA from 'jssha'
+import axios from 'axios'
+
 export function getAuthorizationHeader() {
   //  填入自己 ID、KEY 開始
   let AppID = 'a465ec9e862b4c6cb1388215b593a2d0'
@@ -16,4 +18,14 @@ export function getAuthorizationHeader() {
     HMAC +
     '"'
   return { Authorization: Authorization, 'X-Date': GMTString }
+}
+export async function axiosData(url, callback) {
+  try {
+    const result = await axios.get(url, {
+      headers: getAuthorizationHeader(),
+    })
+    callback(result.data)
+  } catch (err) {
+    console.log(err)
+  }
 }
