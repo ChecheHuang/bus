@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/bus/static/css/main.b264a9b7.css",
-    "main.js": "/bus/static/js/main.5c1cc269.js",
+    "main.css": "/bus/static/css/main.8ba125a6.css",
+    "main.js": "/bus/static/js/main.90ec1e36.js",
     "static/media/homeBg.png": "/bus/static/media/homeBg.d0e44b0ccc88861a7456.png",
     "static/media/ipadHomeBg.png": "/bus/static/media/ipadHomeBg.adedea69e37fdbcbe76f.png",
     "static/media/iphoneHomeBg.png": "/bus/static/media/iphoneHomeBg.7cfa09d105616a261ec4.png",
@@ -9,11 +9,11 @@
     "static/media/taiwanBus.png": "/bus/static/media/taiwanBus.37b512eb585d063faf4e.png",
     "static/media/Bus.mp3": "/bus/static/media/Bus.e16b9da44f6cee364048.mp3",
     "index.html": "/bus/index.html",
-    "main.b264a9b7.css.map": "/bus/static/css/main.b264a9b7.css.map",
-    "main.5c1cc269.js.map": "/bus/static/js/main.5c1cc269.js.map"
+    "main.8ba125a6.css.map": "/bus/static/css/main.8ba125a6.css.map",
+    "main.90ec1e36.js.map": "/bus/static/js/main.90ec1e36.js.map"
   },
   "entrypoints": [
-    "static/css/main.b264a9b7.css",
-    "static/js/main.5c1cc269.js"
+    "static/css/main.8ba125a6.css",
+    "static/js/main.90ec1e36.js"
   ]
 }
