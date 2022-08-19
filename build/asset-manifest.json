@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/bus/static/css/main.b264a9b7.css",
-    "main.js": "/bus/static/js/main.42e6bba6.js",
-    "static/media/homeBg.png": "/bus/static/media/homeBg.d0e44b0ccc88861a7456.png",
-    "static/media/ipadHomeBg.png": "/bus/static/media/ipadHomeBg.adedea69e37fdbcbe76f.png",
-    "static/media/iphoneHomeBg.png": "/bus/static/media/iphoneHomeBg.7cfa09d105616a261ec4.png",
-    "static/media/routeImg.png": "/bus/static/media/routeImg.1f72c62de3c62149286b.png",
-    "static/media/taiwanBus.png": "/bus/static/media/taiwanBus.37b512eb585d063faf4e.png",
-    "static/media/Bus.mp3": "/bus/static/media/Bus.e16b9da44f6cee364048.mp3",
-    "index.html": "/bus/index.html",
-    "main.b264a9b7.css.map": "/bus/static/css/main.b264a9b7.css.map",
-    "main.42e6bba6.js.map": "/bus/static/js/main.42e6bba6.js.map"
+    "main.css": "./static/css/main.485bd689.css",
+    "main.js": "./static/js/main.84c35364.js",
+    "static/media/homeBg.png": "./static/media/homeBg.d0e44b0ccc88861a7456.png",
+    "static/media/ipadHomeBg.png": "./static/media/ipadHomeBg.adedea69e37fdbcbe76f.png",
+    "static/media/iphoneHomeBg.png": "./static/media/iphoneHomeBg.7cfa09d105616a261ec4.png",
+    "static/media/routeImg.png": "./static/media/routeImg.1f72c62de3c62149286b.png",
+    "static/media/taiwanBus.png": "./static/media/taiwanBus.37b512eb585d063faf4e.png",
+    "static/media/Bus.mp3": "./static/media/Bus.e16b9da44f6cee364048.mp3",
+    "index.html": "./index.html",
+    "main.485bd689.css.map": "./static/css/main.485bd689.css.map",
+    "main.84c35364.js.map": "./static/js/main.84c35364.js.map"
   },
   "entrypoints": [
-    "static/css/main.b264a9b7.css",
-    "static/js/main.42e6bba6.js"
+    "static/css/main.485bd689.css",
+    "static/js/main.84c35364.js"
   ]
 }
