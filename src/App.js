@@ -1,5 +1,5 @@
 import './app.scss'
-import { BrowserRouter as HashRouter, Route, Routes } from 'react-router-dom'
+import { HashRouter, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home/Home'
 import SearchBus from './pages/SearchBus/SearchBus'
 
