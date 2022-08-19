@@ -33,6 +33,8 @@ function SearchBus() {
     { title: '紅12', from: '天文科學館', to: '捷運劍潭站' },
     { title: '紅12', from: '天文科學館', to: '捷運劍潭站' },
   ]
+  const audio = new Audio(Bus)
+  audio.loop = true
   function handleButtonClick(value, index) {
     if (index === 0 && value !== '台北市') {
       setButtons(selectCityButtons)
@@ -76,6 +78,11 @@ function SearchBus() {
             return
           }
         }
+        if (typeof value === 'number' || value === 0) {
+          audio.loop = true
+          audio.play()
+          audio.loop = false
+        }
         const newInput = input + value
         setInput(newInput)
         break
@@ -108,7 +115,6 @@ function SearchBus() {
 
   return (
     <div className="searchBus">
-      <audio src={Bus} />
       <div className="searchInput">
         <div className="top">
           <Link to="/">
