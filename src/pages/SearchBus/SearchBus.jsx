@@ -15,6 +15,7 @@ function SearchBus() {
   const [input, setInput] = useState('')
   const [isInputHide, setIsInputHide] = useState(false)
   const [scroll, setScroll] = useState(0)
+  const [selectCity, setSelectCity] = useState({})
   const audio = new Audio(Bus)
   audio.loop = true
   function handleButtonClick(value, index) {
@@ -57,6 +58,11 @@ function SearchBus() {
             const newButtons = JSON.parse(JSON.stringify(selectCityButtons))
             newButtons[index].className = 'active'
             setButtons(newButtons)
+            const selectCity = selectCityButtons.find((item) => {
+              return item.text === value
+            })
+
+            setSelectCity(selectCity)
             return
           }
         }
@@ -82,28 +88,28 @@ function SearchBus() {
     }
   }
 
-  const debouncedSave = useDebounce((nextValue) => {
-    console.log(nextValue)
-  }, 1000)
-
-  function handleType(event) {
-    const { value: nextValue } = event.target
-    setInput(nextValue)
-  }
-  useEffect(() => {
-    if (input !== '') {
-      debouncedSave(input)
-    }
-  }, [input])
-
-  useEffect(() => {
-    axiosData(
-      'https://ptx.transportdata.tw/MOTC/v2/Bus/Route/City/Taipei?%24top=30&%24format=JSON',
+  const debouncedSave = useDebounce(async (selectCity, input) => {
+    setLoading(true)
+    await axiosData(
+      `https://ptx.transportdata.tw/MOTC/v2/Bus/Route/City/${
+        selectCity?.name
+      }/${encodeURIComponent(input)}?%24top=30&%24format=JSON`,
       (data) => {
+        console.log(data)
         setRouteData(data)
       }
     )
-  }, [])
+    setLoading(false)
+  }, 1000)
+
+  function handleType(event) {
+    setInput(event.target.value)
+  }
+  useEffect(() => {
+    if (input !== '' && JSON.stringify(selectCity) !== '{}') {
+      debouncedSave(selectCity, input)
+    }
+  }, [input, selectCity])
 
   return (
     <div className="searchBus">
@@ -145,7 +151,9 @@ function SearchBus() {
           </div>
         ) : (
           <>
-            <div className="title">台北市</div>
+            <div className="title">
+              {selectCity.text === undefined ? '請先選擇縣市' : selectCity.text}
+            </div>
             <div className="results">
               {routeData.map((item, index) => {
                 const {
