@@ -1,13 +1,16 @@
 import './searchBus.scss'
-import turnHome from './images/turnHome.png'
 import Lottie from 'lottie-react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Bus_loading from '../../BUS_loading.json'
 import Bus from '../../Bus.mp3'
 import { useEffect, useState } from 'react'
 import { initButtons, selectCityButtons, moreButtons } from './button'
 import { useDebounce } from '../../config/tool'
 import { axiosData } from '../../api/getAuthorizationHeader'
+import { useDispatch } from 'react-redux'
+import {update} from '../../redux/routeSlice'
+
+import Logo from '../../components/Logo'
 function SearchBus() {
   const [loading, setLoading] = useState(false)
   const [routeData, setRouteData] = useState([])
@@ -16,6 +19,9 @@ function SearchBus() {
   const [isInputHide, setIsInputHide] = useState(false)
   const [scroll, setScroll] = useState(0)
   const [selectCity, setSelectCity] = useState({})
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   const audio = new Audio(Bus)
   audio.loop = true
   function handleButtonClick(value, index) {
@@ -66,7 +72,7 @@ function SearchBus() {
             return
           }
         }
-        if (typeof value === 'number' || value === 0) {
+        if (typeof value === 'number' || value === 0 || value === 'c') {
           audio.loop = true
           audio.play()
           audio.loop = false
@@ -109,15 +115,14 @@ function SearchBus() {
     if (input !== '' && JSON.stringify(selectCity) !== '{}') {
       debouncedSave(selectCity, input)
     }
+    // eslint-disable-next-line
   }, [input, selectCity])
 
   return (
     <div className="searchBus">
       <div className="searchInput">
         <div className="top">
-          <Link to="/">
-            <img src={turnHome} alt="" />
-          </Link>
+          <Logo />
           <input
             id="input"
             value={input}
@@ -164,7 +169,14 @@ function SearchBus() {
                 return (
                   <div
                     onClick={() => {
-                      console.log('test')
+                      dispatch(
+                        update({
+                          name: RouteName.Zh_tw,
+                          route1: DepartureStopNameZh,
+                          route2: DestinationStopNameZh,
+                        })
+                      )
+                      navigate(RouteName.Zh_tw)
                     }}
                     key={index}
                     className="item"

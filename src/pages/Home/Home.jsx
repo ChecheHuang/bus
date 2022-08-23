@@ -1,10 +1,10 @@
 import React from 'react'
 import './home.scss'
-import taiwanBus from './taiwanBus.png'
-import routeImg from './routeImg.png'
-import circle from './circle.png'
-import searchIcon from './searchIcon.png'
-import gpsIcon from './gpsIcon.png'
+import taiwanBus from './images/taiwanBus.png'
+import routeImg from './images/routeImg.png'
+import circle from './images/circle.png'
+import searchIcon from './images/searchIcon.png'
+import gpsIcon from './images/gpsIcon.png'
 import { Link } from 'react-router-dom'
 function Home() {
   return (

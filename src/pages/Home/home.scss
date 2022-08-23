@@ -4,19 +4,19 @@
     width: 100%;
     height: 100vh;
     background: black;
-    background-image: url('./homeBg.png');
+    background-image: url('./images/homeBg.png');
     background-size: cover;
     position: relative;
 
     @include ipad {
         background: rgb(26, 25, 25);
-        background-image: url('./ipadHomeBg.png');
+        background-image: url('./images/ipadHomeBg.png');
         background-size: cover;
 
     }
 
     @include iphone {
-        background-image: url('./iphoneHomeBg.png');
+        background-image: url('./images/iphoneHomeBg.png');
         background-size: cover;
 
     }

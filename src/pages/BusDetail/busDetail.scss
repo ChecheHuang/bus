@@ -1,0 +1,237 @@
+@import "../../mixin.scss";
+
+.busDetail {
+    width: 100%;
+    height: 100vh;
+
+
+    header {
+        width: 100%;
+        height: 160px;
+        background: #131414;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+
+        @include iphone {
+            height: 124px;
+        }
+
+        .top {
+            width: 100%;
+            height: 80px;
+            padding: 0 7.8125vw;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 25px;
+
+            @include ipad {
+                padding: 0 16px;
+            }
+            @include iphone{
+                img{
+                    max-width: 96px;
+                    max-height: 40.26px;
+                }
+            }
+        }
+
+        .bottom {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            @include iphone{
+                justify-content: space-between;
+            }
+
+            div {
+                width: 319px;
+                height: 51.55px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                cursor: pointer;
+                @include iphone{
+                    width: 180px;
+                }
+
+                span {
+                    color: $main;
+                    margin-right: 3px;
+                }
+
+                &.active {
+                    position: relative;
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        width: 100%;
+                        height: 6px;
+                        background: $main;
+                        bottom: 0;
+                        border-radius: 3cm;
+                        box-shadow: 0px 0px 6px $main, 0px 0px 2px $main;
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+.content {
+    width: 100%;
+    height: calc(100vh - 160px);
+    padding: 0 272px;
+    background: #252525;
+    overflow-y: scroll;
+
+    @include ipad {
+        padding: 0 16px;
+    }
+
+    &::-webkit-scrollbar {
+        width: 0.625vw;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: black;
+        -webkit-border-radius: 2em;
+        -moz-border-radius: 2em;
+        border-radius: 2em;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border: 2px solid gray;
+        -webkit-border-radius: 2em;
+        -moz-border-radius: 2em;
+        border-radius: 2em;
+    }
+
+    .remind {
+        width: 100%;
+        text-align: end;
+        color: $main;
+        margin-bottom: 14px;
+    }
+
+    .item {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 14px;
+
+        .left {
+            display: flex;
+            align-items: center;
+
+            .time {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 79px;
+                height: 40px;
+                background: #131414;
+                border: 1px solid #131414;
+                border-radius: 12px;
+                color: #414242;
+                @include H3_TC();
+                margin-right: 11px;
+            }
+
+            .name {
+                @include H3_TC();
+                color: #F5F5F5;
+                ;
+            }
+
+
+        }
+
+        .right {
+            display: flex;
+            align-items: center;
+
+            .mark {
+                display: flex;
+                align-items: center;
+                line-height: 24px;
+                margin-right: 5px;
+                color: $main;
+            }
+
+            .circle {
+                width: 15px;
+                height: 15px;
+                background: #1C1D1D;
+                border: 1.4px solid $main;
+                border-radius: 50%;
+                position: relative;
+                z-index: 2;
+
+
+
+                .line {
+                    position: absolute;
+                    width: 2px;
+                    height: 45px;
+                    background: $main;
+                    top: 101%;
+                    left: 50%;
+                    transform: translate(-50%, 0%);
+                    z-index: 1;
+
+                }
+            }
+        }
+
+        &.active {
+            .left {
+                .time {
+                    background: $main;
+                    box-shadow: 0px 0px 6px $main, 0px 0px 2px $main;
+                    border: 1px solid $main;
+                }
+
+                .name {
+                    color: $main
+                }
+            }
+
+            .right {
+                .circle {
+                    box-shadow: 0px 0px 6px $main, 0px 0px 2px $main;
+                    background: $main;
+                }
+            }
+        }
+
+        &.active2 {
+            .left {
+                .time {
+                    color: $main;
+
+                }
+            }
+        }
+
+        &:last-child {
+            .right {
+                .circle {
+                    .line {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// 100vw = 1280px
+// 
