@@ -8,9 +8,10 @@ import { initButtons, selectCityButtons, moreButtons } from './button'
 import { useDebounce } from '../../config/tool'
 import { axiosData } from '../../api/getAuthorizationHeader'
 import { useDispatch } from 'react-redux'
-import {update} from '../../redux/routeSlice'
+import { update } from '../../redux/routeSlice'
 
 import Logo from '../../components/Logo'
+import { clearConfigCache } from 'prettier'
 function SearchBus() {
   const [loading, setLoading] = useState(false)
   const [routeData, setRouteData] = useState([])
@@ -101,7 +102,6 @@ function SearchBus() {
         selectCity?.name
       }/${encodeURIComponent(input)}?%24top=30&%24format=JSON`,
       (data) => {
-        console.log(data)
         setRouteData(data)
       }
     )
@@ -117,7 +117,6 @@ function SearchBus() {
     }
     // eslint-disable-next-line
   }, [input, selectCity])
-
   return (
     <div className="searchBus">
       <div className="searchInput">
@@ -176,7 +175,7 @@ function SearchBus() {
                           route2: DestinationStopNameZh,
                         })
                       )
-                      navigate(RouteName.Zh_tw)
+                      navigate(`${selectCity.name}/${RouteName.Zh_tw}`)
                     }}
                     key={index}
                     className="item"

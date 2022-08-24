@@ -11,7 +11,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/searchBus" element={<SearchBus />} />
-          <Route path="/searchBus/:routeName" element={<BusDetail />} />
+          <Route path="/searchBus/:city/:routeName" element={<BusDetail />} />
           <Route path="*" element={<div>not found</div>} />
         </Routes>
       </HashRouter>

@@ -1,6 +1,6 @@
 import './busDetail.scss'
 import { axiosData } from '../../api/getAuthorizationHeader'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import map from './images/map.png'
@@ -11,17 +11,41 @@ import { formatSecond } from '../../config/tool'
 
 function BusDetail() {
   const [data, setData] = useState([])
-  const routeName = useParams().routeName
-  const routeInfo = useSelector((state) => state.route.routeInfo)
+  const { routeName, city } = useParams()
+  const [fromAndTo, setFromAndTo] = useState({ from: '', to: '' })
+  const [displayDataIndex, setDisplayedDataIndex] = useState(0)
+  const [time, setTime] = useState(0)
+
+  // const routeInfo = useSelector((state) => state.route.routeInfo)
+  function handleTo(index) {
+    if (displayDataIndex !== index) {
+      setDisplayedDataIndex(index)
+      document
+        .querySelector('.content')
+        .scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+    }
+  }
+
   useEffect(() => {
     ;(async function () {
       await axiosData(
-        `https://ptx.transportdata.tw/MOTC/v2/Bus/DisplayStopOfRoute/City/Taipei/${encodeURIComponent(
+        `https://ptx.transportdata.tw/MOTC/v2/Bus/Route/City/${city}/${encodeURIComponent(
+          routeName
+        )}?%24top=30&%24format=JSON`,
+        (data) => {
+          setFromAndTo({
+            from: data[0].DepartureStopNameZh,
+            to: data[0].DestinationStopNameZh,
+          })
+        }
+      )
+      await axiosData(
+        `https://ptx.transportdata.tw/MOTC/v2/Bus/DisplayStopOfRoute/City/${city}/${encodeURIComponent(
           routeName
         )}?%24format=JSON`,
         async (data) => {
           await axiosData(
-            `https://ptx.transportdata.tw/MOTC/v2/Bus/EstimatedTimeOfArrival/City/Taipei/${encodeURIComponent(
+            `https://ptx.transportdata.tw/MOTC/v2/Bus/EstimatedTimeOfArrival/City/${city}/${encodeURIComponent(
               routeName
             )}?%24format=JSON`,
             (secondData) => {
@@ -36,13 +60,18 @@ function BusDetail() {
                 })
                 return item
               })
-              console.log(newData)
               setData(newData)
             }
           )
         }
       )
     })()
+    const interval = setInterval(() => {
+      setTime((prev) => {
+        return prev + 1
+      })
+    }, 2000)
+    return () => clearInterval(interval)
     // eslint-disable-next-line
   }, [])
   return (
@@ -54,19 +83,29 @@ function BusDetail() {
           <img src={map} alt="" />
         </div>
         <div className="bottom">
-          <div className="active">
+          <div
+            onClick={() => {
+              handleTo(0)
+            }}
+            className={displayDataIndex === 0 ? 'active' : ''}
+          >
             <span>往</span>
-            {routeInfo.route1}
+            {fromAndTo.from}
           </div>
-          <div className="">
+          <div
+            onClick={() => {
+              handleTo(1)
+            }}
+            className={displayDataIndex === 1 ? 'active' : ''}
+          >
             <span>往</span>
-            {routeInfo.route2}
+            {fromAndTo.to}
           </div>
         </div>
       </header>
       <div className="content">
-        <div className="remind">*於3秒前更新</div>
-        {data[0]?.Stops.map((item, index) => {
+        <div className="remind">*於{time}秒前更新</div>
+        {data[displayDataIndex]?.Stops.map((item, index) => {
           const { StopName, StopStatus, EstimateTime, StopUID } = item
           let text = ''
           let className = 'item'

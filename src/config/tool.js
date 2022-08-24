@@ -26,8 +26,7 @@ export function formatSecond(value) {
       minuteTime = parseInt(minuteTime % 60)
     }
   }
-  var result = '' + parseInt(secondTime) + '秒'
-
+  var result = ''
   if (minuteTime > 0) {
     result = '' + parseInt(minuteTime) + '分' + result
   }
