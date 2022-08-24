@@ -7,7 +7,7 @@ import map from './images/map.png'
 import wheelchair from './images/wheelchair.png'
 import Back from '../../components/Back'
 import Logo from '../../components/Logo'
-import { current } from '@reduxjs/toolkit'
+import { formatSecond } from '../../config/tool'
 
 function BusDetail() {
   const [data, setData] = useState([])
@@ -25,8 +25,8 @@ function BusDetail() {
               routeName
             )}?%24format=JSON`,
             (secondData) => {
-              console.log(data)
-              console.log(secondData)
+              // console.log(data)
+              // console.log(secondData)
               const newData = data.map((item) => {
                 item.Stops = item.Stops.map((stop) => {
                   const newStop = secondData.find(
@@ -36,7 +36,8 @@ function BusDetail() {
                 })
                 return item
               })
-              // setData(newData)
+              console.log(newData)
+              setData(newData)
             }
           )
         }
@@ -66,18 +67,48 @@ function BusDetail() {
       <div className="content">
         <div className="remind">*於3秒前更新</div>
         {data[0]?.Stops.map((item, index) => {
-          console.log(item)
-          const {StopName,StopStatus}=item
+          const { StopName, StopStatus, EstimateTime, StopUID } = item
+          let text = ''
+          let className = 'item'
+          switch (StopStatus) {
+            case 0:
+              if (formatSecond(EstimateTime).includes('分')) {
+                text = formatSecond(EstimateTime)
+                className += ' active2'
+              } else {
+                text = '進站中'
+                className += ' active'
+              }
+              break
+            case 1:
+              text = '尚未發車'
+              break
+            case 2:
+              text = '交管不停靠'
+
+              break
+            case 3:
+              text = '末班車已過'
+              break
+            case 4:
+              text = '今日未營運'
+              break
+            default:
+              break
+          }
           return (
-            <div key={index} className="item">
+            <div key={index} className={className}>
               <div className="left">
-                <div className="time">未發車</div>
-                <div className="name">富州里</div>
+                <div className="time">{text}</div>
+                <div className="name">{StopName.Zh_tw}</div>
               </div>
               <div className="right">
                 <div className="mark">
-                  <img src={wheelchair} alt="" />
-                  619-U3
+                  {Math.floor(Math.random() * 5) === 2 && (
+                    <img src={wheelchair} alt="" />
+                  )}
+
+                  {StopUID}
                 </div>
                 <div className="circle">
                   <div className="line"></div>
@@ -86,51 +117,6 @@ function BusDetail() {
             </div>
           )
         })}
-        <div className="item">
-          <div className="left">
-            <div className="time">未發車</div>
-            <div className="name">富州里</div>
-          </div>
-          <div className="right">
-            <div className="mark">
-              <img src={wheelchair} alt="" />
-              619-U3
-            </div>
-            <div className="circle">
-              <div className="line"></div>
-            </div>
-          </div>
-        </div>
-        <div className="item active2">
-          <div className="left">
-            <div className="time">未發車</div>
-            <div className="name">富州里</div>
-          </div>
-          <div className="right">
-            <div className="mark">
-              <img src={wheelchair} alt="" />
-              619-U3
-            </div>
-            <div className="circle">
-              <div className="line"></div>
-            </div>
-          </div>
-        </div>
-        <div className="item active">
-          <div className="left">
-            <div className="time">未發車</div>
-            <div className="name">富州里</div>
-          </div>
-          <div className="right">
-            <div className="mark">
-              <img src={wheelchair} alt="" />
-              619-U3
-            </div>
-            <div className="circle">
-              <div className="line"></div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   )
