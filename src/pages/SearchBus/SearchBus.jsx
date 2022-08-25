@@ -118,7 +118,7 @@ function SearchBus() {
     // eslint-disable-next-line
   }, [input, selectCity])
   return (
-    <div className="searchBus">
+    <div className="searchBus" style={{ height: `${window.innerHeight}px` }}>
       <div className="searchInput">
         <div className="top">
           <Logo />

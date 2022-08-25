@@ -26,6 +26,9 @@
             align-items: center;
             justify-content: space-between;
             padding-top: 25px;
+            img{
+                cursor: pointer;
+            }
 
             @include ipad {
                 padding: 0 16px;
@@ -121,6 +124,7 @@
         margin-bottom: 14px;
         display: flex;
         justify-content: flex-end;
+        align-items: center;
     }
 
     .item {
@@ -233,6 +237,13 @@
                 }
             }
         }
+    }
+}
+.map{
+    width: 100%;
+    height: calc(100vh - 160px);
+    @include iphone{
+        height: calc(100vh - 124px);
     }
 }
 
