@@ -8,7 +8,7 @@ import gpsIcon from './images/gpsIcon.png'
 import { Link } from 'react-router-dom'
 function Home() {
   return (
-    <div className="home">
+    <div className="home" style={{ height: `${window.innerHeight}px` }}>
       <div className="contain">
         <img className="logoImg" src={taiwanBus} alt="" />
         <div className="route">

@@ -117,9 +117,10 @@
 
     .remind {
         width: 100%;
-        text-align: end;
         color: $main;
         margin-bottom: 14px;
+        display: flex;
+        justify-content: flex-end;
     }
 
     .item {

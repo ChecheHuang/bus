@@ -1,13 +1,13 @@
 import './busDetail.scss'
 import { axiosData } from '../../api/getAuthorizationHeader'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 import map from './images/map.png'
 import wheelchair from './images/wheelchair.png'
 import Back from '../../components/Back'
 import Logo from '../../components/Logo'
 import { formatSecond } from '../../config/tool'
+import Time from '../../components/Time'
 
 function BusDetail() {
   const [data, setData] = useState([])
@@ -66,12 +66,7 @@ function BusDetail() {
         }
       )
     })()
-    const interval = setInterval(() => {
-      setTime((prev) => {
-        return prev + 1
-      })
-    }, 2000)
-    return () => clearInterval(interval)
+
     // eslint-disable-next-line
   }, [])
   return (
@@ -104,7 +99,11 @@ function BusDetail() {
         </div>
       </header>
       <div className="content">
-        <div className="remind">*於{time}秒前更新</div>
+        <div className="remind">
+          *於
+          <Time />
+          秒前更新
+        </div>
         {data[displayDataIndex]?.Stops.map((item, index) => {
           const { StopName, StopStatus, EstimateTime, StopUID } = item
           let text = ''
