@@ -15,7 +15,6 @@ function BusDetail() {
   const [fromAndTo, setFromAndTo] = useState({ from: '', to: '' })
   const [displayDataIndex, setDisplayedDataIndex] = useState(0)
   const [displayStatus, setDisplayStatus] = useState('content')
-
   function handleTo(index) {
     if (displayDataIndex !== index) {
       setDisplayedDataIndex(index)
