@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import wheelchair from './images/wheelchair.png'
+import Loading from '../../components/Loading'
 import {
   GoogleMap,
   LoadScript,
@@ -8,9 +9,11 @@ import {
   InfoBox,
 } from '@react-google-maps/api'
 function Map({ data, displayDataIndex }) {
-  const center = {
-    lat: data[displayDataIndex]?.Stops[0]?.StopPosition?.PositionLat,
-    lng: data[displayDataIndex]?.Stops[0]?.StopPosition?.PositionLon,
+  const [loading, setLoading] = useState(false)
+
+
+  if (loading) {
+    return <Loading />
   }
 
   return (
@@ -21,10 +24,11 @@ function Map({ data, displayDataIndex }) {
             width: '100%',
             height: '100%',
           }}
-          center={
-            center.lat !== undefined ? center : { lat: -3.745, lng: -38.523 }
-          }
-          zoom={18}
+          center={{
+            lat: data[displayDataIndex]?.Stops[0]?.StopPosition?.PositionLat,
+            lng: data[displayDataIndex]?.Stops[0]?.StopPosition?.PositionLon,
+          }}
+          zoom={13}
           options={{
             zoomControl: false,
             streetViewControl: false,
@@ -43,7 +47,7 @@ function Map({ data, displayDataIndex }) {
                 options={{ closeBoxURL: '', enableEventPropagation: true }}
                 position={position}
               >
-                <div className="mapIcon">1</div>
+                <div className="mapIcon">{index + 1}</div>
               </InfoBox>
             )
           })}

@@ -44,7 +44,7 @@ export const selectCityButtons = [
   { text: '屏東縣', name: 'PingtungCountry', className: '' },
   { text: '台東縣', name: 'TaitungCountry', className: '' },
   { text: '花蓮縣', name: 'HualienCountry', className: '' },
-  { text: '宜蘭縣', name: 'YilanCountry', className: '' },
+  { text: '宜蘭縣', name: 'YilanCounty', className: '' },
   { text: '澎湖縣', name: 'PenghuCountry', className: '' },
   { text: '金門縣', name: 'KinmenCountry', className: '' },
   { text: '連江縣', name: 'LienchiangCountry', className: '' },

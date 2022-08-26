@@ -1,7 +1,5 @@
 import './searchBus.scss'
-import Lottie from 'lottie-react'
 import { useNavigate } from 'react-router-dom'
-import Bus_loading from '../../BUS_loading.json'
 import Bus from '../../Bus.mp3'
 import { useEffect, useState } from 'react'
 import { initButtons, selectCityButtons, moreButtons } from './button'
@@ -9,9 +7,8 @@ import { useDebounce } from '../../config/tool'
 import { axiosData } from '../../api/getAuthorizationHeader'
 import { useDispatch } from 'react-redux'
 import { update } from '../../redux/routeSlice'
-
 import Logo from '../../components/Logo'
-import { clearConfigCache } from 'prettier'
+import Loading from '../../components/Loading'
 function SearchBus() {
   const [loading, setLoading] = useState(false)
   const [routeData, setRouteData] = useState([])
@@ -150,9 +147,7 @@ function SearchBus() {
       </div>
       <div onScroll={handleScroll} className="searchResults">
         {loading ? (
-          <div className="lottieContainer">
-            <Lottie animationData={Bus_loading} loop={true} />
-          </div>
+          <Loading />
         ) : (
           <>
             <div className="title">

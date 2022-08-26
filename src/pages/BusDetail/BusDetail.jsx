@@ -14,7 +14,7 @@ function BusDetail() {
   const { routeName, city } = useParams()
   const [fromAndTo, setFromAndTo] = useState({ from: '', to: '' })
   const [displayDataIndex, setDisplayedDataIndex] = useState(0)
-  const [displayStatus, setDisplayStatus] = useState('map')
+  const [displayStatus, setDisplayStatus] = useState('content')
 
   function handleTo(index) {
     if (displayDataIndex !== index) {
