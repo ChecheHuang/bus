@@ -26,15 +26,17 @@
             align-items: center;
             justify-content: space-between;
             padding-top: 25px;
-            img{
+
+            img {
                 cursor: pointer;
             }
 
             @include ipad {
                 padding: 0 16px;
             }
-            @include iphone{
-                img{
+
+            @include iphone {
+                img {
                     max-width: 96px;
                     max-height: 40.26px;
                 }
@@ -45,7 +47,8 @@
             width: 100%;
             display: flex;
             justify-content: center;
-            @include iphone{
+
+            @include iphone {
                 justify-content: space-between;
             }
 
@@ -57,7 +60,8 @@
                 justify-content: center;
                 color: white;
                 cursor: pointer;
-                @include iphone{
+
+                @include iphone {
                     width: 180px;
                 }
 
@@ -96,7 +100,8 @@
     @include ipad {
         padding: 0 16px;
     }
-    @include iphone{
+
+    @include iphone {
         height: calc(100vh - 124px);
     }
 
@@ -239,11 +244,25 @@
         }
     }
 }
-.map{
+
+.map {
     width: 100%;
     height: calc(100vh - 160px);
-    @include iphone{
+
+    @include iphone {
         height: calc(100vh - 124px);
+    }
+
+    .mapIcon {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 4px solid $main;
+        background: #000;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
 

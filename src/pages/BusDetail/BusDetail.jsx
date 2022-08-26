@@ -50,7 +50,8 @@ function BusDetail() {
                   const newStop = secondData.find(
                     (item) => item.StopUID === stop.StopUID
                   )
-                  return newStop === undefined ? stop : newStop
+
+                  return newStop === undefined ? stop : { ...stop, ...newStop }
                 })
                 return item
               })

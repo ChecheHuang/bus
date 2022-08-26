@@ -1,8 +1,17 @@
 import React from 'react'
-import { GoogleMap, LoadScript, Marker, Polyline } from '@react-google-maps/api'
+import wheelchair from './images/wheelchair.png'
+import {
+  GoogleMap,
+  LoadScript,
+  Marker,
+  Polyline,
+  InfoBox,
+} from '@react-google-maps/api'
 function Map({ data, displayDataIndex }) {
-  console.log(data)
-  console.log(displayDataIndex)
+  const center = {
+    lat: data[displayDataIndex]?.Stops[0]?.StopPosition?.PositionLat,
+    lng: data[displayDataIndex]?.Stops[0]?.StopPosition?.PositionLon,
+  }
 
   return (
     <div className="map">
@@ -12,7 +21,9 @@ function Map({ data, displayDataIndex }) {
             width: '100%',
             height: '100%',
           }}
-          center={{ lat: -3.745, lng: -38.523 }}
+          center={
+            center.lat !== undefined ? center : { lat: -3.745, lng: -38.523 }
+          }
           zoom={18}
           options={{
             zoomControl: false,
@@ -22,15 +33,18 @@ function Map({ data, displayDataIndex }) {
           }}
         >
           {data[displayDataIndex]?.Stops.map((item, index) => {
-            console.log(item)
+            const position = {
+              lat: item.StopPosition.PositionLat,
+              lng: item.StopPosition.PositionLon,
+            }
             return (
-              <Marker
+              <InfoBox
                 key={index}
-                // position={{
-                //   lat: i.StationPosition.PositionLat,
-                //   lng: i.StationPosition.PositionLon,
-                // }}
-              />
+                options={{ closeBoxURL: '', enableEventPropagation: true }}
+                position={position}
+              >
+                <div className="mapIcon">1</div>
+              </InfoBox>
             )
           })}
         </GoogleMap>
