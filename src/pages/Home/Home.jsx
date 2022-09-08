@@ -16,7 +16,7 @@ function Home() {
           <img className="circle img1" src={circle} alt="" />
           <img className="circle img2" src={circle} alt="" />
           <img className="circle img3" src={circle} alt="" />
-          <Link to="nearbyBus">
+          <Link to="nearby">
             <button className="button1">
               <img src={gpsIcon} alt="" />
               附近公車站

@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import mapBus from './images/mapBus.png'
 import { mapStyle, polylineStyle } from './mapStyle'
 import Loading from '../../components/Loading'
+import BusMarker from './BusMarker'
 import {
   GoogleMap,
   LoadScript,
-  Marker,
   Polyline,
   InfoBox,
 } from '@react-google-maps/api'
 import { useEffect } from 'react'
+
 function Map({ data, displayDataIndex }) {
   const [paths, setPaths] = useState([])
   const [loading, setLoading] = useState(false)
@@ -51,19 +51,10 @@ function Map({ data, displayDataIndex }) {
           }}
         >
           <Polyline path={paths} options={polylineStyle} />
-          <Marker
-            position={{
-              lat: data[displayDataIndex]?.Stops[0]?.StopPosition?.PositionLat,
-              lng: data[displayDataIndex]?.Stops[0]?.StopPosition?.PositionLon,
-            }}
-            icon={{
-              url: mapBus,
-            }}
-          />
-
+          <BusMarker stops={data[displayDataIndex]?.Stops} />
           {data[displayDataIndex]?.Stops.map((stop, index) => {
             const position = {
-              lat: stop.StopPosition.PositionLat,
+              lat: stop.StopPosition.PositionLat ,
               lng: stop.StopPosition.PositionLon,
             }
             return (
@@ -71,6 +62,7 @@ function Map({ data, displayDataIndex }) {
                 key={index}
                 options={{ closeBoxURL: '', enableEventPropagation: true }}
                 position={position}
+                zIndex={1}
               >
                 <div className="mapIcon">{index + 1}</div>
               </InfoBox>

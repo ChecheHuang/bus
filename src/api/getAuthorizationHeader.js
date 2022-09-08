@@ -19,13 +19,14 @@ export function getAuthorizationHeader() {
     '"'
   return { Authorization: Authorization, 'X-Date': GMTString }
 }
-export async function axiosData(url, callback) {
+export async function axiosData(url, callback, catchError) {
   try {
     const result = await axios.get(url, {
       headers: getAuthorizationHeader(),
     })
     callback(result.data)
   } catch (err) {
-    console.log(err)
+    alert('請求發生錯誤')
+    // console.log(err)
   }
 }
